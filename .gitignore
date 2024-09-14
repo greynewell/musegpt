@@ -1,0 +1,8 @@
+build/debug
+build/release
+build/llama.cpp
+models
+.vscode
+.DS_Store
+.env
+*.gguf
