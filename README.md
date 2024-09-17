@@ -53,19 +53,37 @@ If you want to build from source, follow these steps:
 
 3. **Build the project:**
 
-   ```bash
-   ./scripts/build/debug.sh
-   ```
-   
-   or
-   
-   ```bash
-   ./scripts/build/release.sh
-   ```
+   - **On Windows:**
 
-4. **Install the VST3 plugin:**
+     Run the PowerShell build script:
 
-   CMake will automatically copy the built VST3 plugin to your DAW's plugin directory.
+     ```powershell
+     .\scripts\build\debug.ps1
+     ```
+
+     or
+
+     ```powershell
+     .\scripts\build\release.ps1
+     ```
+
+   - **On macOS/Linux:**
+
+     Run the shell build script:
+
+     ```bash
+     ./scripts/build/debug.sh
+     ```
+
+     or
+
+     ```bash
+     ./scripts/build/release.sh
+     ```
+
+4. **Install the plugin:**
+
+   CMake will automatically copy the built VST3, AU, or AAX plugin to your DAW's plugin directory.
 
    - **macOS:** `~/Library/Audio/Plug-Ins/VST3/`
    - **Windows:** `C:\Program Files\Common Files\VST3\`
@@ -79,7 +97,7 @@ After installing musegpt, open your DAW and rescan for new plugins. Load `musegp
 
 Feel free to experiment with the system prompt to customize the behavior of the LLM. Here's a suggestion to get you started:
 
-> You are a helpful assistant that lives inside a musician's Digital Audio Workstation. Help them by giving them step-by-step instructions about music- composition, writing, performance, production, and engineering - in a creative and methodical way.
+> You are a helpful assistant that lives inside a musician's Digital Audio Workstation. Help them by giving them step-by-step instructions about music—composition, writing, performance, production, and engineering—in a creative and methodical way.
 
 ## Requirements
 
@@ -87,7 +105,7 @@ Feel free to experiment with the system prompt to customize the behavior of the 
   - Windows 10 or later
   - macOS 10.11 or later
   - Linux (mainstream distributions)
-- **DAW Support:** Any DAW that supports VST3 plugins (Ableton Live, FL Studio, Logic Pro, Pro Tools,etc.)
+- **DAW Support:** Any DAW that supports VST3 plugins (Ableton Live, FL Studio, Logic Pro, Pro Tools, etc.)
 - **Dependencies:**
   - [JUCE](https://juce.com/) (Audio application framework)
   - [llama.cpp](https://github.com/ggerganov/llama.cpp) (LLM inference library)
@@ -122,7 +140,7 @@ musegpt currently supports the following models:
 
 - **gemma-2b-it.fp16.gguf**
 
-Any model compatible with `llama.cpp` should work with `musegpt`. Feel free to experiment with different models to find the best one for your needs - and raise a pull request!
+Any model compatible with `llama.cpp` should work with `musegpt`. Feel free to experiment with different models to find the best one for your needs—and raise a pull request!
 
 ## Contributing
 
