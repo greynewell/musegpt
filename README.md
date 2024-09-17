@@ -19,14 +19,14 @@ Run local Large Language Models (LLMs) in your Digital Audio Workstation (DAW) t
 
 ## Features
 
+Currently supported features include:
+
 - ✅ LLM chat
 - ✅ VST3 plugin
 - ✅ MIDI input
 - ✅ Audio input
-- ❌ MIDI analysis (In Progress)
-- ❌ Audio analysis (In Progress)
-- ❌ MIDI generation (Upcoming)
-- ❌ Audio generation (Upcoming)
+
+For more information about plans for upcoming features, check out the [Roadmap on GitHub Projects](https://github.com/users/greynewell/projects/1)!
 
 ## Demo
 
@@ -141,6 +141,10 @@ This project is licensed under the [AGPL v3](LICENSE).
 - **[JUCE](https://juce.com/):** For the powerful audio application framework.
 - **[llama.cpp](https://github.com/ggerganov/llama.cpp):** For enabling efficient LLM inference.
 - **Community Contributors:** Thanks to everyone who has contributed to open-source projects that make `musegpt` possible.
+
+## Community
+
+Join our community on Discord! [GreyArea.ai](http://greyarea.ai)
 
 ---
 
