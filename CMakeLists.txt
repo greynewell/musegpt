@@ -93,7 +93,7 @@ if (WIN32)
     # Copy llama-server to Windows output directory
     add_custom_command(TARGET musegpt POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy
-                ${CMAKE_BINARY_DIR}/llama-server${EXE_SUFFIX}
+                ${CMAKE_BINARY_DIR}/Debug/llama-server${EXE_SUFFIX}
                 $<TARGET_FILE_DIR:musegpt>/llama-server${EXE_SUFFIX}
     )
 else()
