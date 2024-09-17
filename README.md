@@ -43,7 +43,7 @@ If you want to build from source, follow these steps:
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/greynewell/musegpt.git
+   git clone --recurse-submodules -j2 https://github.com/greynewell/musegpt.git
    cd musegpt
    ```
 
