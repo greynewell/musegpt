@@ -68,33 +68,47 @@ PRIVATE
     $<$<CONFIG:Release>:-O3>
 )
 
+# Define the executable suffix
+set(EXE_SUFFIX "")
+if (WIN32)
+    set(EXE_SUFFIX ".exe")
+endif()
+
 # Add llama-server as a binary resource
 add_custom_command(
-    OUTPUT ${CMAKE_BINARY_DIR}/llama-server
+    OUTPUT ${CMAKE_BINARY_DIR}/llama-server${EXE_SUFFIX}
     COMMAND ${CMAKE_COMMAND} -E copy
-            ${CMAKE_SOURCE_DIR}/build/llama.cpp/bin/llama-server
-            ${CMAKE_BINARY_DIR}/llama-server
-    DEPENDS ${CMAKE_SOURCE_DIR}/build/llama.cpp/bin/llama-server
+            ${CMAKE_SOURCE_DIR}/build/llama.cpp/bin/llama-server${EXE_SUFFIX}
+            ${CMAKE_BINARY_DIR}/llama-server${EXE_SUFFIX}
+    DEPENDS ${CMAKE_SOURCE_DIR}/build/llama.cpp/bin/llama-server${EXE_SUFFIX}
 )
-add_custom_target(copy_llama_server ALL DEPENDS ${CMAKE_BINARY_DIR}/llama-server)
+add_custom_target(copy_llama_server ALL DEPENDS ${CMAKE_BINARY_DIR}/llama-server${EXE_SUFFIX})
 
 # Ensure the executable is copied into the bundle
-set_source_files_properties(${CMAKE_BINARY_DIR}/llama-server PROPERTIES MACOSX_PACKAGE_LOCATION Resources)
-target_sources(musegpt PRIVATE ${CMAKE_BINARY_DIR}/llama-server)
+set_source_files_properties(${CMAKE_BINARY_DIR}/llama-server${EXE_SUFFIX} PROPERTIES MACOSX_PACKAGE_LOCATION Resources)
+target_sources(musegpt PRIVATE ${CMAKE_BINARY_DIR}/llama-server${EXE_SUFFIX})
 
-# Copy llama-server to VST plugin format's output directory
-add_custom_command(TARGET musegpt POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy
-            ${CMAKE_BINARY_DIR}/llama-server
-            $<TARGET_FILE_DIR:musegpt>/VST3/musegpt.vst3/Contents/Resources/llama-server
-)
-
-# Copy llama-server to Standalone plugin format's output directory
-add_custom_command(TARGET musegpt POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy
-            ${CMAKE_BINARY_DIR}/llama-server
-            $<TARGET_FILE_DIR:musegpt>/Standalone/musegpt.app/Contents/Resources/llama-server
-)
+# Platform-specific resource copying
+if (WIN32)
+    # Copy llama-server to Windows output directory
+    add_custom_command(TARGET musegpt POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy
+                ${CMAKE_BINARY_DIR}/llama-server${EXE_SUFFIX}
+                $<TARGET_FILE_DIR:musegpt>/llama-server${EXE_SUFFIX}
+    )
+else()
+    # Copy llama-server to macOS or Linux plugin formats
+    add_custom_command(TARGET musegpt POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy
+                ${CMAKE_BINARY_DIR}/llama-server${EXE_SUFFIX}
+                $<TARGET_FILE_DIR:musegpt>/VST3/musegpt.vst3/Contents/Resources/llama-server${EXE_SUFFIX}
+    )
+    add_custom_command(TARGET musegpt POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy
+                ${CMAKE_BINARY_DIR}/llama-server${EXE_SUFFIX}
+                $<TARGET_FILE_DIR:musegpt>/Standalone/musegpt.app/Contents/Resources/llama-server${EXE_SUFFIX}
+    )
+endif()
 
 # Copy model weights to VST plugin format's output directory
 add_custom_command(TARGET musegpt POST_BUILD
