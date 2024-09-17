@@ -9,10 +9,6 @@ if (Test-Path -Path $VST3Path) {
 # Create build output directories
 New-Item -ItemType Directory -Path 'build\release' -Force
 
-# Install WebView2 dependency for the plugin
-Register-PackageSource -provider NuGet -name nugetRepository -location https://www.nuget.org/api/v2
-Install-Package Microsoft.Web.WebView2 -Scope CurrentUser -RequiredVersion 1.0.1901.177 -Source nugetRepository
-
 # Download models
 & ".\scripts\models.ps1"
 

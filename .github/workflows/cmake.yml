@@ -46,6 +46,11 @@ jobs:
       with:
         submodules: 'true'
 
+    - name: Install WebView2 on Windows
+      if: runner.os == 'Windows'
+      uses: nuget/setup-nuget@v2
+      run: nuget install Microsoft.Web.WebView2 -Version 1.0.1901.177
+
     - name: Build on Windows
       if: runner.os == 'Windows'
       run: .\scripts\build\windows_release.ps1
