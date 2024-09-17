@@ -5,7 +5,6 @@ add_subdirectory(JUCE)
 # Setup JUCE build settings, source code and compile definitions
 
 juce_add_plugin(musegpt
-    NEEDS_WEBVIEW2 TRUE
     NEEDS_WEB_BROWSER TRUE
     PLUGIN_MANUFACTURER_CODE Grey
     PLUGIN_CODE Muse 
@@ -24,7 +23,6 @@ target_compile_definitions(musegpt
         JUCE_DEBUG=1  # Enable debug mode
         JUCE_LOGGING=1  # Enable logging
         JUCE_STRICT_REFCOUNTEDPOINTER=1
-        JUCE_USE_WIN_WEBVIEW2_WITH_STATIC_LINKING=1
         JUCE_WEB_BROWSER=1
         JUCE_USE_CURL=0
         JUCE_VST3_CAN_REPLACE_VST2=0)
