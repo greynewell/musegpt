@@ -19,19 +19,37 @@ If you prefer to build from source, follow these steps:
 
 3. **Build the project:**
 
-   ```bash
-   ./scripts/build/debug.sh
-   ```
-   
-   or
-   
-   ```bash
-   ./scripts/build/release.sh
-   ```
+   - **On Windows:**
+
+     Run the PowerShell build script:
+
+     ```powershell
+     .\scripts\build\debug.ps1
+     ```
+
+     or
+
+     ```powershell
+     .\scripts\build\release.ps1
+     ```
+
+   - **On macOS/Linux:**
+
+     Run the shell build script:
+
+     ```bash
+     ./scripts/build/debug.sh
+     ```
+
+     or
+
+     ```bash
+     ./scripts/build/release.sh
+     ```
 
 4. **Install the plugin:**
 
-   CMake will automatically copy the built VST3, AU or AAX plugin to your DAW's plugin directory. Example paths for VST3 are:
+   CMake will automatically copy the built VST3, AU, or AAX plugin to your DAW's plugin directory. Example paths for VST3 are:
    
    - **macOS:** `~/Library/Audio/Plug-Ins/VST3/`
    - **Windows:** `C:\Program Files\Common Files\VST3\`
