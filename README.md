@@ -4,6 +4,12 @@
 
 Run local Large Language Models (LLMs) in your Digital Audio Workstation (DAW) to create music.
 
+## Architecture
+
+![Architecture Diagram](assets/musegpt.drawio.png)
+
+For more information, see [Technical Approach](https://musegpt.org/technical_approach.html).
+
 ## Table of Contents
 
 - [Features](#features)

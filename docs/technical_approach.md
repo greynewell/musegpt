@@ -1,5 +1,7 @@
 # Technical Approach
 
+![musegpt Architecture Diagram](../assets/musegpt.drawio.png)
+
 ## Selecting an Audio Programming Language
 
 C++ was chosen for its:
@@ -31,8 +33,6 @@ C++ was chosen for its:
 
 - Utilized CMake for building and packaging the plugin.
 - The architecture allows low-latency inference calls and communication between the plugin and the LLM.
-
-![musegpt Architecture Diagram](assets/architecture-diagram.png)
 
 ---
 
