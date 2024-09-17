@@ -9,7 +9,7 @@ juce_add_plugin(musegpt
     NEEDS_WEB_BROWSER TRUE
     PLUGIN_MANUFACTURER_CODE Grey
     PLUGIN_CODE Muse 
-    FORMATS AAX VST3 Standalone # The formats to build. Other valid formats are: AAX Unity VST AU AUv3
+    FORMATS AAX AU AUv3 VST3 Standalone
     PRODUCT_NAME "musegpt"
     COPY_PLUGIN_AFTER_BUILD TRUE)
 juce_generate_juce_header(musegpt)
@@ -88,26 +88,40 @@ target_sources(musegpt PRIVATE ${CMAKE_BINARY_DIR}/llama-server)
 add_custom_command(TARGET musegpt POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy
             ${CMAKE_BINARY_DIR}/llama-server
-            $<TARGET_FILE_DIR:musegpt>/VST3/Groopie.vst3/Contents/Resources/llama-server
+            $<TARGET_FILE_DIR:musegpt>/VST3/musegpt.vst3/Contents/Resources/llama-server
 )
 
 # Copy llama-server to Standalone plugin format's output directory
 add_custom_command(TARGET musegpt POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy
             ${CMAKE_BINARY_DIR}/llama-server
-            $<TARGET_FILE_DIR:musegpt>/Standalone/Groopie.app/Contents/Resources/llama-server
+            $<TARGET_FILE_DIR:musegpt>/Standalone/musegpt.app/Contents/Resources/llama-server
 )
 
 # Copy model weights to VST plugin format's output directory
 add_custom_command(TARGET musegpt POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy
             ${CMAKE_SOURCE_DIR}/models/gemma-2b-it.fp16.gguf
-            $<TARGET_FILE_DIR:musegpt>/VST3/Groopie.vst3/Contents/Resources/gemma-2b-it.fp16.gguf
+            $<TARGET_FILE_DIR:musegpt>/VST3/musegpt.vst3/Contents/Resources/gemma-2b-it.fp16.gguf
 )
 
 # Copy model weights to Standalone plugin format's output directory
 add_custom_command(TARGET musegpt POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy
             ${CMAKE_SOURCE_DIR}/models/gemma-2b-it.fp16.gguf
-            $<TARGET_FILE_DIR:musegpt>/Standalone/Groopie.app/Contents/Resources/gemma-2b-it.fp16.gguf
+            $<TARGET_FILE_DIR:musegpt>/Standalone/musegpt.app/Contents/Resources/gemma-2b-it.fp16.gguf
+)
+
+# Copy model weights to AAX plugin format's output directory
+add_custom_command(TARGET musegpt POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy
+            ${CMAKE_SOURCE_DIR}/models/gemma-2b-it.fp16.gguf
+            $<TARGET_FILE_DIR:musegpt>/AAX/musegpt.aaxplugin/Contents/Resources/gemma-2b-it.fp16.gguf
+)
+
+# Copy model weights to AU plugin format's output directory
+add_custom_command(TARGET musegpt POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy
+            ${CMAKE_SOURCE_DIR}/models/gemma-2b-it.fp16.gguf
+            $<TARGET_FILE_DIR:musegpt>/AU/musegp.component/Contents/Resources/gemma-2b-it.fp16.gguf
 )
