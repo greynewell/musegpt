@@ -14,7 +14,7 @@ New-Item -ItemType Directory -Path 'build\release' -Force
 
 # Build llama.cpp server
 Push-Location -Path 'llama.cpp'
-cmake -S . -B ../build/llama.cpp -D CMAKE_BUILD_TYPE=Release
+cmake -S . -B ../build/llama.cpp
 $cores = [Environment]::ProcessorCount
 cmake --build ../build/llama.cpp --target llama-server -- /m:$cores
 Pop-Location
