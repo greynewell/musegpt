@@ -2,7 +2,6 @@
 
 ## Operating System
 
-- **Windows:** Windows 10 or later
 - **macOS:** macOS 10.11 or later
 - **Linux:** Mainstream distributions
 

@@ -1,6 +1,6 @@
 # musegpt
 
-[![CMake](https://github.com/greynewell/musegpt/actions/workflows/cmake.yml/badge.svg?branch=main)](https://github.com/greynewell/musegpt/actions/workflows/cmake.yml) [![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0) [![Platform Support](https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux-blue)](#supported-platforms) [![C++](https://img.shields.io/badge/c++-17-%2300599C.svg?logo=c%2B%2B&logoColor=white)](https://isocpp.org/) [![JUCE](https://img.shields.io/badge/JUCE-8-8DC63F&logo=juce&logoColor=white)](https://juce.com/) [![llama.cpp](https://img.shields.io/badge/llama.cpp-feff4aa-violet&logoColor=white)](https://github.com/ggerganov/llama.cpp/commit/feff4aa8461da7c432d144c11da4802e41fef3cf)
+[![CMake](https://github.com/greynewell/musegpt/actions/workflows/cmake.yml/badge.svg?branch=main)](https://github.com/greynewell/musegpt/actions/workflows/cmake.yml) [![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0) [![Platform Support](https://img.shields.io/badge/platform-macOS%20%7C%20Linux-blue)](#supported-platforms) [![C++](https://img.shields.io/badge/c++-17-%2300599C.svg?logo=c%2B%2B&logoColor=white)](https://isocpp.org/) [![JUCE](https://img.shields.io/badge/JUCE-8-8DC63F&logo=juce&logoColor=white)](https://juce.com/) [![llama.cpp](https://img.shields.io/badge/llama.cpp-feff4aa-violet&logoColor=white)](https://github.com/ggerganov/llama.cpp/commit/feff4aa8461da7c432d144c11da4802e41fef3cf)
 
 Run local Large Language Models (LLMs) in your Digital Audio Workstation (DAW) to create music.
 
@@ -60,22 +60,6 @@ If you want to build from source, follow these steps:
 
 3. **Build the project:**
 
-   - **On Windows:**
-
-     Run the PowerShell build script:
-
-     ```powershell
-     .\scripts\build\debug.ps1
-     ```
-
-     or
-
-     ```powershell
-     .\scripts\build\release.ps1
-     ```
-
-   - **On macOS/Linux:**
-
      Run the shell build script:
 
      ```bash
@@ -93,7 +77,6 @@ If you want to build from source, follow these steps:
    CMake will automatically copy the built VST3, AU, or AAX plugin to your DAW's plugin directory.
 
    - **macOS:** `~/Library/Audio/Plug-Ins/VST3/`
-   - **Windows:** `C:\Program Files\Common Files\VST3\`
    - **Linux:** `~/.vst3/`
 
 ## Getting Started
@@ -109,7 +92,6 @@ Feel free to experiment with the system prompt to customize the behavior of the 
 ## Requirements
 
 - **Operating System:**
-  - Windows 10 or later
   - macOS 10.11 or later
   - Linux (mainstream distributions)
 - **DAW Support:** Any DAW that supports VST3 plugins (Ableton Live, FL Studio, Logic Pro, Pro Tools, etc.)
@@ -137,7 +119,6 @@ Feel free to experiment with the system prompt to customize the behavior of the 
 
 musegpt is cross-platform and supports the following operating systems:
 
-- **Windows:** Windows 10 or later
 - **macOS:** macOS 10.11 or later
 - **Linux:** Mainstream distributions
 

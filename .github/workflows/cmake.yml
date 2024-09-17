@@ -13,13 +13,10 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, windows-latest]
+        os: [ubuntu-latest, macos-latest]
         build_type: [Release]
-        c_compiler: [gcc, clang, cl]
+        c_compiler: [gcc, clang]
         include:
-          - os: windows-latest
-            c_compiler: cl
-            cpp_compiler: cl
           - os: ubuntu-latest
             c_compiler: gcc
             cpp_compiler: g++
@@ -30,27 +27,13 @@ jobs:
             c_compiler: clang
             cpp_compiler: clang++
         exclude:
-          - os: windows-latest
-            c_compiler: gcc
-          - os: windows-latest
-            c_compiler: clang
-          - os: ubuntu-latest
-            c_compiler: cl
           - os: macos-latest
             c_compiler: gcc
-          - os: macos-latest
-            c_compiler: cl
 
     steps:
     - uses: actions/checkout@v4
       with:
         submodules: 'true'
 
-    - name: Build on Windows
-      if: runner.os == 'Windows'
-      run: .\scripts\build\windows_release.ps1
-      shell: pwsh
-
-    - name: Build on Linux/macOS
-      if: runner.os != 'Windows'
+    - name: Build (Linux/macOS)
       run: ./scripts/build/release.sh
