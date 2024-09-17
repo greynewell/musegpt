@@ -9,7 +9,7 @@ juce_add_plugin(musegpt
     NEEDS_WEB_BROWSER TRUE
     PLUGIN_MANUFACTURER_CODE Grey
     PLUGIN_CODE Muse 
-    FORMATS VST3 Standalone # The formats to build. Other valid formats are: AAX Unity VST AU AUv3
+    FORMATS AAX VST3 Standalone # The formats to build. Other valid formats are: AAX Unity VST AU AUv3
     PRODUCT_NAME "musegpt"
     COPY_PLUGIN_AFTER_BUILD TRUE)
 juce_generate_juce_header(musegpt)
