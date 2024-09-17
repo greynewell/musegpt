@@ -11,7 +11,7 @@ scripts/models.sh
 
 # build llama.cpp server
 cd llama.cpp
-cmake -S . -B ../build/llama.cpp
+cmake -S . -B ../build/llama.cpp -D CMAKE_BUILD_TYPE=Release
 cmake --build ../build/llama.cpp -j $(sysctl -n hw.physicalcpu) --target llama-server
 cd ..
 
