@@ -1,6 +1,6 @@
 # Technical Approach
 
-![musegpt Architecture Diagram](../assets/musegpt.drawio.png)
+![musegpt Architecture Diagram](assets/musegpt.drawio.png)
 
 ## Selecting an Audio Programming Language
 
