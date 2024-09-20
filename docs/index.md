@@ -20,8 +20,6 @@ Welcome to **musegpt** documentation! This site will guide you through the featu
 - [Technical Approach](technical_approach.md)
 - [Practical Applications](practical_applications.md)
 - [Ethics](ethics.md)
-- [Contributing](contributing.md)
-- [License](license.md)
 - [Acknowledgments](acknowledgments.md)
 
 ---
