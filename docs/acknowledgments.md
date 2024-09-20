@@ -1,4 +1,4 @@
-# Acknowledgments
+# Acknowledgments [![GitHub Repo stars](https://img.shields.io/github/stars/greynewell/musegpt)](https://github.com/greynewell/musegpt/stargazers)
 
 - **[JUCE](https://juce.com/):** For the powerful audio application framework.
 - **[llama.cpp](https://github.com/ggerganov/llama.cpp):** For enabling efficient LLM inference.

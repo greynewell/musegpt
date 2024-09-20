@@ -1,4 +1,4 @@
-# Practical Applications
+# Practical Applications [![GitHub Repo stars](https://img.shields.io/github/stars/greynewell/musegpt)](https://github.com/greynewell/musegpt/stargazers)
 
 ## Inspiration and Instructions
 

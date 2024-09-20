@@ -1,4 +1,4 @@
-# Contributing
+# Contributing [![GitHub Repo stars](https://img.shields.io/github/stars/greynewell/musegpt)](https://github.com/greynewell/musegpt/stargazers)
 
 We welcome contributions from the community!
 

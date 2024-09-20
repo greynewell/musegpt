@@ -1,4 +1,4 @@
-# Requirements
+# Requirements [![GitHub Repo stars](https://img.shields.io/github/stars/greynewell/musegpt)](https://github.com/greynewell/musegpt/stargazers)
 
 ## Operating System
 

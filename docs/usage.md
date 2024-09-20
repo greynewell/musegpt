@@ -1,4 +1,4 @@
-# Usage
+# Usage [![GitHub Repo stars](https://img.shields.io/github/stars/greynewell/musegpt)](https://github.com/greynewell/musegpt/stargazers)
 
 **musegpt** enhances your music production workflow by integrating AI assistance directly into your DAW.
 

@@ -1,4 +1,4 @@
-# Getting Started
+# Getting Started [![GitHub Repo stars](https://img.shields.io/github/stars/greynewell/musegpt)](https://github.com/greynewell/musegpt/stargazers)
 
 After installing **musegpt**, follow these steps to start integrating AI into your music creation process:
 

@@ -1,4 +1,4 @@
-# Supported Platforms
+# Supported Platforms [![GitHub Repo stars](https://img.shields.io/github/stars/greynewell/musegpt)](https://github.com/greynewell/musegpt/stargazers)
 
 **musegpt** is cross-platform and supports the following operating systems:
 

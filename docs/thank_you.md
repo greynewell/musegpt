@@ -1,4 +1,4 @@
-# Thank You!
+# Thank You! [![GitHub Repo stars](https://img.shields.io/github/stars/greynewell/musegpt)](https://github.com/greynewell/musegpt/stargazers)
 
 We appreciate everyone who has given the repository a star on GitHub! If you're excited to work on the future of human and AI musical collaboration, check out some open issues on the [repo](https://github.com/greynewell/musegpt).
 

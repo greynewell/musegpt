@@ -1,4 +1,4 @@
-# Installation
+# Installation [![GitHub Repo stars](https://img.shields.io/github/stars/greynewell/musegpt)](https://github.com/greynewell/musegpt/stargazers)
 
 You can install **musegpt** by downloading the latest binaries from the [Releases](https://github.com/greynewell/musegpt/releases) page.
 
