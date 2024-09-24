@@ -2,6 +2,8 @@
 New-Item -ItemType Directory -Force -Path .\models
 
 # Setup virtual environment and dependencies
+# Remove .env directory
+Remove-Item -Path ".env" -Recurse -Force -ErrorAction SilentlyContinue
 python -m venv .env
 .\.env\Scripts\Activate.ps1
 pip install -r requirements.txt

@@ -72,27 +72,27 @@ PRIVATE
 if(WIN32)
     # Windows-specific commands
     add_custom_command(
-        OUTPUT ${CMAKE_BINARY_DIR}/Debug/llama-server.exe
+        OUTPUT ${CMAKE_BINARY_DIR}/$<CONFIG>/llama-server.exe
         COMMAND ${CMAKE_COMMAND} -E copy
-                ${CMAKE_SOURCE_DIR}/build/llama.cpp/bin/Debug/llama-server.exe
-                ${CMAKE_BINARY_DIR}/Debug/llama-server.exe
-        DEPENDS ${CMAKE_SOURCE_DIR}/build/llama.cpp/bin/Debug/llama-server.exe
+                ${CMAKE_SOURCE_DIR}/build/llama.cpp/bin/$<CONFIG>/llama-server.exe
+                ${CMAKE_BINARY_DIR}/$<CONFIG>/llama-server.exe
+        DEPENDS ${CMAKE_SOURCE_DIR}/build/llama.cpp/bin/$<CONFIG>/llama-server.exe
     )
-    add_custom_target(copy_llama_server ALL DEPENDS ${CMAKE_BINARY_DIR}/Debug/llama-server.exe)
-    set_source_files_properties(${CMAKE_BINARY_DIR}/Debug/llama-server.exe PROPERTIES MACOSX_PACKAGE_LOCATION Resources)
-    target_sources(musegpt PRIVATE ${CMAKE_BINARY_DIR}/Debug/llama-server.exe)
+    add_custom_target(copy_llama_server ALL DEPENDS ${CMAKE_BINARY_DIR}/$<CONFIG>/llama-server.exe)
+    set_source_files_properties(${CMAKE_BINARY_DIR}/$<CONFIG>/llama-server.exe PROPERTIES MACOSX_PACKAGE_LOCATION Resources)
+    target_sources(musegpt PRIVATE ${CMAKE_BINARY_DIR}/$<CONFIG>/llama-server.exe)
 
     # Copy llama-server to VST plugin format's output directory
     add_custom_command(TARGET musegpt POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy
-                ${CMAKE_BINARY_DIR}/Debug/llama-server.exe
+                ${CMAKE_BINARY_DIR}/$<CONFIG>/llama-server.exe
                 $<TARGET_FILE_DIR:musegpt>/VST3/musegpt.vst3/Contents/Resources/llama-server.exe
     )
 
     # Copy llama-server to Standalone plugin format's output directory
     add_custom_command(TARGET musegpt POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy
-                ${CMAKE_BINARY_DIR}/Debug/llama-server.exe
+                ${CMAKE_BINARY_DIR}/$<CONFIG>/llama-server.exe
                 $<TARGET_FILE_DIR:musegpt>/musegpt.exe/llama-server.exe
     )
 
