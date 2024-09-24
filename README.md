@@ -6,7 +6,6 @@ Run local Large Language Models (LLMs) in your Digital Audio Workstation (DAW) t
 
 ## Table of Contents
 
-- [Architecture](#architecture)
 - [Features](#features)
 - [Demo](#demo)
 - [Installation](#installation)
@@ -14,15 +13,11 @@ Run local Large Language Models (LLMs) in your Digital Audio Workstation (DAW) t
 - [Requirements](#requirements)
 - [Usage](#usage)
 - [Supported Platforms](#supported-platforms)
+- [Supported Models](#supported-models)
+- [Architecture](#architecture)
 - [Contributing](#contributing)
 - [License](#license)
 - [Acknowledgments](#acknowledgments)
-
-## Architecture
-
-![Architecture Diagram](assets/musegpt.drawio.png)
-
-For more information, see [Technical Approach](https://musegpt.org/technical_approach.html).
 
 ## Features
 
@@ -136,6 +131,12 @@ musegpt currently supports the following models:
 - **gemma-2b-it.fp16.gguf**
 
 Any model compatible with `llama.cpp` should work with `musegpt`. Feel free to experiment with different models to find the best one for your needs—and raise a pull request!
+
+## Architecture
+
+![Architecture Diagram](assets/musegpt.drawio.png)
+
+For more information, see [Technical Approach](https://musegpt.org/technical_approach.html).
 
 ## Contributing
 
