@@ -28,7 +28,7 @@ jobs:
             cpp_compiler: cl
         exclude:
           - os: ubuntu-latest
-            c_compiler: cli
+            c_compiler: cl
           - os: macos-latest
             c_compiler: cl
           - os: windows-latest
