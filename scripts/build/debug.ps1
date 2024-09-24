@@ -10,7 +10,7 @@ New-Item -Path "build\debug" -ItemType Directory -Force
 # build llama.cpp server
 
 Push-Location llama.cpp
-cmake -S . -G "Visual Studio 17 2022" -DCMAKE_CXX_COMPILER="/c/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/VC/Tools/MSVC/14.41.34120/bin/HostX86/x86/cl" -DCMAKE_C_COMPILER="/c/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/VC/Tools/MSVC/14.41.34120/bin/HostX86/x86/cl" -B ..\build\llama.cpp
+cmake -S . -G "Visual Studio 17 2022" -B ..\build\llama.cpp
 cmake --build ..\build\llama.cpp -j $env:NUMBER_OF_PROCESSORS --target llama-server
 Pop-Location
 
