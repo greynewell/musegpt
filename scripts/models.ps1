@@ -7,4 +7,8 @@ python -m venv .env
 pip install -r requirements.txt
 
 # Download GGUF models
-huggingface-cli download MaziyarPanahi/gemma-2b-it-GGUF gemma-2b-it.fp16.gguf --local-dir .\models
+$MODEL_REPO="MaziyarPanahi/gemma-2b-it-GGUF"
+$MODEL_FILE="gemma-2b-it.fp16.gguf"
+$MODEL_DIR=".\models"
+
+huggingface-cli download $MODEL_REPO $MODEL_FILE --local-dir $MODEL_DIR
