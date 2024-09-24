@@ -54,6 +54,12 @@ If you want to build from source, follow these steps:
    cd musegpt
    ```
 
+   In case you forgot to clone with submodules, run:
+
+   ```bash
+   git submodule update --init --recursive
+   ```
+
 2. **Install dependencies:**
 
    Ensure you have the required dependencies installed. See [Requirements](#requirements) for details.
@@ -99,6 +105,7 @@ Feel free to experiment with the system prompt to customize the behavior of the 
   - [JUCE](https://juce.com/) (Audio application framework)
   - [llama.cpp](https://github.com/ggerganov/llama.cpp) (LLM inference library)
   - C++17 compatible compiler (e.g., GCC 7+, Clang 5+, MSVC 2017+)
+  - [Python](https://www.python.org/) 3.10 or later (for model downloading and processing)
   - [CMake](https://cmake.org/) 3.15 or later
 
 ## Usage

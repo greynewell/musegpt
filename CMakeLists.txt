@@ -68,58 +68,99 @@ PRIVATE
     $<$<CONFIG:Release>:-O3>
 )
 
-# Add llama-server as a binary resource
-add_custom_command(
-    OUTPUT ${CMAKE_BINARY_DIR}/llama-server
-    COMMAND ${CMAKE_COMMAND} -E copy
-            ${CMAKE_SOURCE_DIR}/build/llama.cpp/bin/llama-server
-            ${CMAKE_BINARY_DIR}/llama-server
-    DEPENDS ${CMAKE_SOURCE_DIR}/build/llama.cpp/bin/llama-server
-)
-add_custom_target(copy_llama_server ALL DEPENDS ${CMAKE_BINARY_DIR}/llama-server)
+# Add llama-server as a binary resource and copy files
+if(WIN32)
+    # Windows-specific commands
+    add_custom_command(
+        OUTPUT ${CMAKE_BINARY_DIR}/Debug/llama-server.exe
+        COMMAND ${CMAKE_COMMAND} -E copy
+                ${CMAKE_SOURCE_DIR}/build/llama.cpp/bin/Debug/llama-server.exe
+                ${CMAKE_BINARY_DIR}/Debug/llama-server.exe
+        DEPENDS ${CMAKE_SOURCE_DIR}/build/llama.cpp/bin/Debug/llama-server.exe
+    )
+    add_custom_target(copy_llama_server ALL DEPENDS ${CMAKE_BINARY_DIR}/Debug/llama-server.exe)
+    set_source_files_properties(${CMAKE_BINARY_DIR}/Debug/llama-server.exe PROPERTIES MACOSX_PACKAGE_LOCATION Resources)
+    target_sources(musegpt PRIVATE ${CMAKE_BINARY_DIR}/Debug/llama-server.exe)
 
-# Ensure the executable is copied into the bundle
-set_source_files_properties(${CMAKE_BINARY_DIR}/llama-server PROPERTIES MACOSX_PACKAGE_LOCATION Resources)
-target_sources(musegpt PRIVATE ${CMAKE_BINARY_DIR}/llama-server)
+    # Copy llama-server to VST plugin format's output directory
+    add_custom_command(TARGET musegpt POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy
+                ${CMAKE_BINARY_DIR}/Debug/llama-server.exe
+                $<TARGET_FILE_DIR:musegpt>/VST3/musegpt.vst3/Contents/Resources/llama-server.exe
+    )
 
-# Copy llama-server to VST plugin format's output directory
-add_custom_command(TARGET musegpt POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy
-            ${CMAKE_BINARY_DIR}/llama-server
-            $<TARGET_FILE_DIR:musegpt>/VST3/musegpt.vst3/Contents/Resources/llama-server
-)
+    # Copy llama-server to Standalone plugin format's output directory
+    add_custom_command(TARGET musegpt POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy
+                ${CMAKE_BINARY_DIR}/Debug/llama-server.exe
+                $<TARGET_FILE_DIR:musegpt>/musegpt.exe/llama-server.exe
+    )
 
-# Copy llama-server to Standalone plugin format's output directory
-add_custom_command(TARGET musegpt POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy
-            ${CMAKE_BINARY_DIR}/llama-server
-            $<TARGET_FILE_DIR:musegpt>/Standalone/musegpt.app/Contents/Resources/llama-server
-)
+    # Copy model weights to VST plugin format's output directory
+    add_custom_command(TARGET musegpt POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy
+                ${CMAKE_SOURCE_DIR}/models/gemma-2b-it.fp16.gguf
+                $<TARGET_FILE_DIR:musegpt>/VST3/musegpt.vst3/Contents/Resources/gemma-2b-it.fp16.gguf
+    )
 
-# Copy model weights to VST plugin format's output directory
-add_custom_command(TARGET musegpt POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy
-            ${CMAKE_SOURCE_DIR}/models/gemma-2b-it.fp16.gguf
-            $<TARGET_FILE_DIR:musegpt>/VST3/musegpt.vst3/Contents/Resources/gemma-2b-it.fp16.gguf
-)
+    # Copy model weights to Standalone plugin format's output directory
+    add_custom_command(TARGET musegpt POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy
+                ${CMAKE_SOURCE_DIR}/models/gemma-2b-it.fp16.gguf
+                $<TARGET_FILE_DIR:musegpt>/musegpt.exe/gemma-2b-it.fp16.gguf
+    )
+else()
+    # Non-Windows commands
+    add_custom_command(
+        OUTPUT ${CMAKE_BINARY_DIR}/llama-server
+        COMMAND ${CMAKE_COMMAND} -E copy
+                ${CMAKE_SOURCE_DIR}/build/llama.cpp/bin/llama-server
+                ${CMAKE_BINARY_DIR}/llama-server
+        DEPENDS ${CMAKE_SOURCE_DIR}/build/llama.cpp/bin/llama-server
+    )
+    add_custom_target(copy_llama_server ALL DEPENDS ${CMAKE_BINARY_DIR}/llama-server)
+    set_source_files_properties(${CMAKE_BINARY_DIR}/llama-server PROPERTIES MACOSX_PACKAGE_LOCATION Resources)
+    target_sources(musegpt PRIVATE ${CMAKE_BINARY_DIR}/llama-server)
 
-# Copy model weights to Standalone plugin format's output directory
-add_custom_command(TARGET musegpt POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy
-            ${CMAKE_SOURCE_DIR}/models/gemma-2b-it.fp16.gguf
-            $<TARGET_FILE_DIR:musegpt>/Standalone/musegpt.app/Contents/Resources/gemma-2b-it.fp16.gguf
-)
+    # Copy llama-server to VST plugin format's output directory
+    add_custom_command(TARGET musegpt POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy
+                ${CMAKE_BINARY_DIR}/llama-server
+                $<TARGET_FILE_DIR:musegpt>/VST3/musegpt.vst3/Contents/Resources/llama-server
+    )
 
-# Copy model weights to AAX plugin format's output directory
-add_custom_command(TARGET musegpt POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy
-            ${CMAKE_SOURCE_DIR}/models/gemma-2b-it.fp16.gguf
-            $<TARGET_FILE_DIR:musegpt>/AAX/musegpt.aaxplugin/Contents/Resources/gemma-2b-it.fp16.gguf
-)
+    # Copy llama-server to Standalone plugin format's output directory
+    add_custom_command(TARGET musegpt POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy
+                ${CMAKE_BINARY_DIR}/llama-server
+                $<TARGET_FILE_DIR:musegpt>/Standalone/musegpt.app/Contents/Resources/llama-server
+    )
 
-# Copy model weights to AU plugin format's output directory
-add_custom_command(TARGET musegpt POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy
-            ${CMAKE_SOURCE_DIR}/models/gemma-2b-it.fp16.gguf
-            $<TARGET_FILE_DIR:musegpt>/AU/musegp.component/Contents/Resources/gemma-2b-it.fp16.gguf
-)
+    # Copy model weights to VST plugin format's output directory
+    add_custom_command(TARGET musegpt POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy
+                ${CMAKE_SOURCE_DIR}/models/gemma-2b-it.fp16.gguf
+                $<TARGET_FILE_DIR:musegpt>/VST3/musegpt.vst3/Contents/Resources/gemma-2b-it.fp16.gguf
+    )
+
+    # Copy model weights to Standalone plugin format's output directory
+    add_custom_command(TARGET musegpt POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy
+                ${CMAKE_SOURCE_DIR}/models/gemma-2b-it.fp16.gguf
+                $<TARGET_FILE_DIR:musegpt>/Standalone/musegpt.app/Contents/Resources/gemma-2b-it.fp16.gguf
+    )
+
+    # Copy model weights to AAX plugin format's output directory
+    add_custom_command(TARGET musegpt POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy
+                ${CMAKE_SOURCE_DIR}/models/gemma-2b-it.fp16.gguf
+                $<TARGET_FILE_DIR:musegpt>/AAX/musegpt.aaxplugin/Contents/Resources/gemma-2b-it.fp16.gguf
+    )
+
+    # Copy model weights to AU plugin format's output directory
+    add_custom_command(TARGET musegpt POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy
+                ${CMAKE_SOURCE_DIR}/models/gemma-2b-it.fp16.gguf
+                $<TARGET_FILE_DIR:musegpt>/AU/musegp.component/Contents/Resources/gemma-2b-it.fp16.gguf
+    )
+endif()

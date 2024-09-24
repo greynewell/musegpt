@@ -18,5 +18,5 @@ cd ..
 # build main project
 cd build
 cmake -S .. -B debug
-cmake --build debug --config Debug -j $(sysctl -n hw.physicalcpu)
+cmake --build debug --config Debug  -DCMAKE_CXX_COMPILER=/pathto/g++ -DCMAKE_C_COMPILER=/pathto/gcc -j $(sysctl -n hw.physicalcpu)
 cd ..
