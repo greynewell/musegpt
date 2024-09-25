@@ -8,8 +8,8 @@ New-Item -Path "build\release" -ItemType Directory -Force
 & "$PSScriptRoot\..\models.ps1"
 
 # Install webview2
-Register-PackageSource -provider NuGet -name nugetRepository -location https://www.nuget.org/api/v2
-Install-Package Microsoft.Web.WebView2 -Scope CurrentUser -RequiredVersion 1.0.1901.177 -Source nugetRepository
+Register-PackageSource -provider NuGet -name nugetRepository -location https://www.nuget.org/api/v2 -Force
+Install-Package Microsoft.Web.WebView2 -Scope CurrentUser -RequiredVersion 1.0.1901.177 -Source nugetRepository -Force
 
 # build llama.cpp server
 Push-Location llama.cpp
