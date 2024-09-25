@@ -1,0 +1,1 @@
+.\build\debug\musegpt_artefacts\Debug\Standalone\musegpt.exe
