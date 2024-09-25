@@ -1,6 +1,6 @@
-[submodule "JUCE"]
-	path = JUCE
-	url = git@github.com:juce-framework/JUCE.git
 [submodule "llama.cpp"]
 	path = llama.cpp
-	url = git@github.com:ggerganov/llama.cpp.git
+	url = https://github.com/ggerganov/llama.cpp.git
+[submodule "JUCE"]
+	path = JUCE
+	url = https://github.com/juce-framework/JUCE.git

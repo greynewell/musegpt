@@ -1,5 +1,9 @@
 # Features [![GitHub Repo stars](https://img.shields.io/github/stars/greynewell/musegpt)](https://github.com/greynewell/musegpt/stargazers)
 
+**musegpt** allows you to run local Large Language Models directly within your DAW, enhancing your music creation process by providing AI-powered assistance.
+
+Current features include:
+
 - ✅ LLM chat
 - ✅ VST3 plugin
 - ✅ MIDI input
@@ -9,7 +13,7 @@
 - ❌ MIDI generation (Upcoming)
 - ❌ Audio generation (Upcoming)
 
-**musegpt** allows you to run local Large Language Models directly within your DAW, enhancing your music creation process by providing AI-powered assistance.
+To see upcoming features, check out the [GitHub issues](https://github.com/greynewell/musegpt/issues) and [Roadmap on GitHub Projects](https://github.com/greynewell/musegpt/projects/1).
 
 ---
 
