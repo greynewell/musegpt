@@ -10,7 +10,8 @@ juce_add_plugin(musegpt
     PLUGIN_CODE Muse 
     FORMATS AAX AU AUv3 VST3 Standalone
     PRODUCT_NAME "musegpt"
-    COPY_PLUGIN_AFTER_BUILD TRUE)
+    COPY_PLUGIN_AFTER_BUILD TRUE
+    NEEDS_WEBVIEW2  TRUE)
 juce_generate_juce_header(musegpt)
 
 target_sources(musegpt
@@ -24,6 +25,7 @@ target_compile_definitions(musegpt
         JUCE_LOGGING=1  # Enable logging
         JUCE_STRICT_REFCOUNTEDPOINTER=1
         JUCE_WEB_BROWSER=1
+        JUCE_USE_WIN_WEBVIEW2_WITH_STATIC_LINKING=1
         JUCE_USE_CURL=0
         JUCE_VST3_CAN_REPLACE_VST2=0)
 
