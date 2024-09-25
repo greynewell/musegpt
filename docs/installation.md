@@ -44,6 +44,8 @@ If you prefer to build from source, follow these steps:
      ./scripts/build/release.ps1
      ```
 
+     **You may need to run the above commands with administrative privileges on Windows.**
+
      Each build script will also download the relevant model weights for the inference engine.
 
 4. **Install the plugin:**
