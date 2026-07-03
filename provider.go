@@ -5,12 +5,19 @@ package infermux
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"sync"
 	"time"
 
 	"github.com/greynewell/mist-go/protocol"
 )
+
+// ErrNoProvider is returned when no registered provider serves the
+// requested model. Transport layers (HTTP, gRPC) use errors.Is against
+// this sentinel to map routing failures to the correct status code
+// instead of matching error strings.
+var ErrNoProvider = errors.New("no provider for model")
 
 // Provider is an LLM provider that can handle inference requests.
 type Provider interface {
@@ -138,7 +145,7 @@ func (r *Registry) Resolve(model string) (Provider, error) {
 		}
 	}
 
-	return nil, fmt.Errorf("no provider for model %q", model)
+	return nil, fmt.Errorf("%w: %q", ErrNoProvider, model)
 }
 
 // Providers returns the names of all registered providers.

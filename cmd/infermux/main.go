@@ -5,9 +5,12 @@ import (
 	"fmt"
 	"net/http"
 	"os"
+	"os/signal"
+	"syscall"
 	"time"
 
 	"github.com/greynewell/infermux"
+	"github.com/greynewell/infermux/grpcserver"
 	"github.com/greynewell/mist-go/cli"
 	"github.com/greynewell/mist-go/tokentrace"
 )
@@ -39,6 +42,41 @@ func main() {
 		return http.ListenAndServe(addr, mux)
 	}
 	app.AddCommand(serve)
+
+	serveGRPC := &cli.Command{
+		Name:  "serve-grpc",
+		Usage: "Start the InferMux gRPC server",
+	}
+	serveGRPC.AddStringFlag("addr", ":8601", "gRPC listen address")
+	serveGRPC.AddStringFlag("tokentrace", "", "TokenTrace URL for span reporting")
+	serveGRPC.Run = func(cmd *cli.Command, args []string) error {
+		reg := infermux.NewRegistry()
+		reg.Register(infermux.NewEchoProvider("echo", []string{"echo-v1"}, time.Millisecond))
+
+		reporter := tokentrace.NewReporter("infermux", cmd.GetString("tokentrace"))
+		router := infermux.NewRouter(reg, reporter)
+		svc := grpcserver.NewService(router, reg)
+
+		srv, err := grpcserver.New(svc, grpcserver.Options{Addr: cmd.GetString("addr")})
+		if err != nil {
+			return err
+		}
+
+		// Graceful shutdown: flip health to NOT_SERVING, drain in-flight
+		// RPCs, then stop; hard-stop after 10s.
+		sigCh := make(chan os.Signal, 1)
+		signal.Notify(sigCh, os.Interrupt, syscall.SIGTERM)
+		go func() {
+			<-sigCh
+			ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+			defer cancel()
+			srv.Shutdown(ctx)
+		}()
+
+		fmt.Printf("infermux gRPC listening on %s\n", srv.Addr())
+		return srv.Serve()
+	}
+	app.AddCommand(serveGRPC)
 
 	infer := &cli.Command{
 		Name:  "infer",

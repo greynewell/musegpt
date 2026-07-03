@@ -1,0 +1,71 @@
+syntax = "proto3";
+
+// Package infermux.v1 defines the InferMux inference routing API.
+//
+// Versioning: the package is suffixed with v1 so that breaking changes
+// ship as infermux.v2 side-by-side rather than mutating this contract.
+// Within v1, fields are only ever added (never renumbered or removed)
+// to preserve wire compatibility.
+package infermux.v1;
+
+option go_package = "github.com/greynewell/infermux/gen/infermux/v1;infermuxv1";
+
+// InferMuxService routes inference requests to configured providers and
+// reports token usage, cost, and latency for each call.
+service InferMuxService {
+  // Infer routes a single inference request to the provider that serves
+  // the requested model and returns the completed response.
+  //
+  // Error contract:
+  //   INVALID_ARGUMENT  - empty messages, or malformed request
+  //   NOT_FOUND         - no provider registered for the requested model
+  //   UNAVAILABLE       - the resolved provider failed upstream (retryable)
+  //   DEADLINE_EXCEEDED - the caller's deadline elapsed mid-inference
+  rpc Infer(InferRequest) returns (InferResponse);
+
+  // ListProviders returns all registered providers and their models.
+  rpc ListProviders(ListProvidersRequest) returns (ListProvidersResponse);
+}
+
+// ChatMessage is one turn in a conversation.
+message ChatMessage {
+  // role is one of "system", "user", or "assistant".
+  string role = 1;
+  string content = 2;
+}
+
+// InferRequest asks the router to run inference against a model.
+message InferRequest {
+  // model selects the target model. Empty or "auto" lets the router pick.
+  string model = 1;
+  repeated ChatMessage messages = 2;
+  // max_tokens caps the response length. 0 means provider default.
+  int64 max_tokens = 3;
+  // temperature in [0, 2]. Only honored when temperature_set is true, so
+  // an explicit 0.0 is distinguishable from "not specified".
+  double temperature = 4;
+  bool temperature_set = 5;
+}
+
+// InferResponse is the completed inference result plus routing metadata.
+message InferResponse {
+  string model = 1;
+  string provider = 2;
+  string content = 3;
+  int64 tokens_in = 4;
+  int64 tokens_out = 5;
+  double cost_usd = 6;
+  int64 latency_ms = 7;
+  string finish_reason = 8;
+}
+
+message ListProvidersRequest {}
+
+message ProviderInfo {
+  string name = 1;
+  repeated string models = 2;
+}
+
+message ListProvidersResponse {
+  repeated ProviderInfo providers = 1;
+}
